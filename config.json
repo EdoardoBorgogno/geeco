@@ -1,0 +1,6 @@
+{
+    "webAppRoot": "/geeco/",
+    "apiBaseUrl": "http://127.0.0.1:8000/",
+    "indexBase": 1,
+    "siteBaseUrl": "http://127.0.0.1/geeco/"
+}

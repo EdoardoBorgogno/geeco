@@ -1,0 +1,13 @@
+/* form-geeco */
+.form-geeco{ 
+    margin: 0 auto;
+    width: 100%;
+    max-width: 600px;
+}
+
+.form-geeco * {
+    margin: 10px 0px;
+}
+
+/* Error Style */
+#errorMessageText { color: rgb(255, 132, 0); font-size: 16px; margin-top: 20px; margin-bottom: 20px; opacity: 0; font-weight: 600; }

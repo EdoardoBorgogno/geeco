@@ -1,0 +1,16 @@
+/* Form STYLE */
+.form-geeco-login { border: 0px solid rgb(236, 236, 255); padding: 20px; }
+
+.form-geeco-login p, input { margin: 20px 0px; }
+
+/* Text Style */
+.form-geeco-login p { font-size: 12px; }
+
+/* STYLE BUTTON */
+button { width: 100%; margin: 0;}
+
+/* Image Style */
+.image { width: 14%; margin: 0 auto;}
+
+/* Error Style */
+#errorMessageText { color: rgb(255, 132, 0); font-size: 16px; margin-top: 20px; margin-bottom: 20px; opacity: 0; font-weight: 600; }

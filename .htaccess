@@ -1,0 +1,6 @@
+RewriteEngine On
+
+RewriteCond %{REQUEST_URI} !^/Assets/.
+RewriteCond %{REQUEST_FILENAME} !/geeco/Features/Common/Components/.*
+RewriteCond %{REQUEST_URI} !.css|.png|.icon|.jpeg|.js|.json
+RewriteRule . index.php [QSA,L]
