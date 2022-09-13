@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ShopCategory;
+use App\Models\OrderDetail;
 use App\Models\Product;
 use App\Models\Shop;
 
@@ -15,13 +16,87 @@ class ProductController extends Controller
     {
         $shop_id = $request->query('id');
         $key = $request->query('key');
+        $top_in_days = $request->query('top');
 
         if ($shop_id != null){
-            $products = Product::select('products.productId', 'products.productPrice', 'products.productName', 'products.productDescription', 'products.quantity', 'products.productDiscount', 'products.insertionDate', 'products.productImages', 'shopcategory.categoryName')
+            $products = Product::select('products.productId', 'products.productPrice', 'products.productName', 'products.productDescription', 'bookable', 'availableFrom', 'shop.shopName', 'products.quantity', 'products.productDiscount', 'products.insertionDate', 'products.productImages', 'shopcategory.categoryName')
                                 ->join('shopcategory', 'shopcategory.shopCategoryId', '=', 'products.categoryId')
+                                ->join('shop', 'shop.shopId', '=', 'products.shopId')
                                 ->where('products.shopId', $shop_id)
                                 ->get();
                                 
+            return response()->json(["products" => $products], 200);
+        }
+
+        if ($key != null){
+            $products_ids = [];
+
+            $products_ids = array_merge($products_ids, Product::select('products.productId')
+                                ->limit(20)  
+                                ->where('products.productName', 'like', '%'.$key.'%')
+                                ->get()
+                                ->toArray()
+                            );
+
+            $keys = explode(" ", $key);
+            
+            if (count($keys) > 15){
+                $keys = array_slice($keys, 0, 15);
+            }
+
+            //remove element with length < 3
+            $keys = array_filter($keys, function($value) {
+                return strlen($value) >= 3;
+            });
+
+            foreach ($keys as $key){
+                $products_ids = array_merge($products_ids, Product::select('productId')
+                                                                    ->limit(4)
+                                                                    ->where('productName', 'like', '%'.$key.'%')
+                                                                    ->orWhere('productDescription', 'like', '%'.$key.'%')
+                                                                    ->get()->toArray()
+                                            );
+            }
+
+            $products_ids = array_unique($products_ids, SORT_REGULAR);
+            $products_ids = array_slice($products_ids, 0, 30);
+
+            $products = [];
+            foreach ($products_ids as $product_id){
+                $products = array_merge($products, Product::select('products.productId', 'products.productPrice', 'products.productName', 'products.productDescription', 'bookable', 'availableFrom', 'shop.shopName', 'products.quantity', 'products.productDiscount', 'products.insertionDate', 'products.productImages', 'shopcategory.categoryName')
+                                                        ->join('shopcategory', 'shopcategory.shopCategoryId', '=', 'products.categoryId')
+                                                        ->join('shop', 'shop.shopId', '=', 'products.shopId')
+                                                        ->where('products.productId', $product_id['productId'])
+                                                        ->get()
+                                                        ->toArray()
+                                        );
+            }
+                                
+            return response()->json(["products" => $products], 200);
+        }
+
+        if ($top_in_days != null){
+            
+            $products_ids = OrderDetail::select('productId')
+                                        ->join('orders', 'orders.orderId', '=', 'orderdetails.orderId')
+                                        ->where('orderDate', '>=', date('Y-m-d', strtotime('-'.$top_in_days.' days')))
+                                        ->groupBy('productId')
+                                        ->orderByRaw('SUM(quantity) DESC')
+                                        ->limit(10)
+                                        ->get()
+                                        ->toArray();
+
+            $products = [];
+            foreach ($products_ids as $product_id){
+                $products = array_merge($products, Product::select('products.productId', 'products.productPrice', 'products.productName', 'products.productDescription', 'bookable', 'availableFrom', 'shop.shopName', 'products.quantity', 'products.productDiscount', 'products.insertionDate', 'products.productImages', 'shopcategory.categoryName')
+                                                        ->join('shopcategory', 'shopcategory.shopCategoryId', '=', 'products.categoryId')
+                                                        ->join('shop', 'shop.shopId', '=', 'products.shopId')
+                                                        ->where('products.productId', $product_id['productId'])
+                                                        ->get()
+                                                        ->toArray()
+                                        );
+            }
+
             return response()->json(["products" => $products], 200);
         }
     }
@@ -66,7 +141,7 @@ class ProductController extends Controller
                 'productImage_5' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
                 'category' => 'required|exists:shopcategory,categoryName,shopId,'.$shop_id,
                 'bookable' => 'required|boolean',
-                'availableFrom' => 'required|date_format:Y-m-d H:i:s|after:today'
+                'availableFrom' => 'required|date_format:Y-m-d H:i:s|after:now'
             ]);
 
             //Create Product and set attributes
@@ -129,7 +204,17 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        
+        $product = Product::select('products.productId', 'products.productPrice', 'products.productName', 'products.productDescription', 'bookable', 'availableFrom', 'shop.shopName', 'products.quantity', 'products.productDiscount', 'products.insertionDate', 'products.productImages', 'shopcategory.categoryName')
+                            ->join('shopcategory', 'shopcategory.shopCategoryId', '=', 'products.categoryId')
+                            ->join('shop', 'shop.shopId', '=', 'products.shopId')
+                            ->where('products.productId', $id)
+                            ->get();
+
+        if($product == null) {
+            return response()->json(['Message' => "Sorry, Product not found." ], 404);
+        }
+
+        return response()->json($product, 200);
     }
 
     public function update(Request $request, $id)

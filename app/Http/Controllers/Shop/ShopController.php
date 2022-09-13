@@ -8,6 +8,8 @@ use App\Models\ShopGeecoCategory;
 use App\Models\GeecoCategory;
 use App\Models\CustomerShop;
 use Illuminate\Http\Request;
+use App\Models\OrderDetail;
+use App\Models\Product;
 use App\Models\Shop;
 
 class ShopController extends Controller
@@ -15,6 +17,25 @@ class ShopController extends Controller
     public function index(Request $request)
     {
         // Get 15 customer filtered by condition if there is any
+        
+        $top_shop_days = $request->query('top');
+
+        if (isset($top_shop_days) == true && is_numeric($top_shop_days) == true) {
+            $shop_ids = OrderDetail::select('shopId')
+                                    ->join('orders', 'orders.orderId', '=', 'orderdetails.orderId')
+                                    ->join('products', 'products.productId', '=', 'orderdetails.productId')
+                                    ->where('orders.orderDate', '>=', date('Y-m-d', strtotime('-'.$top_shop_days.' days')))
+                                    ->groupBy('shopId')
+                                    ->orderByRaw('shopId DESC')
+                                    ->limit(10)
+                                    ->get()
+                                    ->toArray();
+
+            $shops = Shop::select('shopId', 'shopName', 'shopShortDescription', 'shopDescription', 'shopCreationDate', 'shopImage')
+                         ->whereIn('shopId', $shop_ids)->get();
+
+            return response()->json(['Shops' => $shops], 200);
+        }
 
         try
         {

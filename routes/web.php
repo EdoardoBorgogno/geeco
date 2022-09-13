@@ -71,6 +71,7 @@ $router->get('/shop/me/show', 'Shop\ShopController@showme');
 $router->post('/product', 'Product\ProductController@store');
 $router->get('/product', 'Product\ProductController@index');
 $router->delete('/product/{id}', 'Product\ProductController@destroy');
+$router->get('/product/{id}', 'Product\ProductController@show');
 
 /*
 |--------------------------------------------------------------------------

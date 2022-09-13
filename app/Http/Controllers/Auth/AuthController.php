@@ -104,7 +104,7 @@ class AuthController extends Controller
         }
     }
 
-    public static function check(string $jwt): bool
+    public static function check(string $jwt, bool $is_customer = null): bool
     {
         try 
         {
@@ -118,7 +118,17 @@ class AuthController extends Controller
             list($headb64, $bodyb64, $cryptob64) = $tks;
             $payload = JWT::jsonDecode(JWT::urlsafeB64Decode($bodyb64));
 
-            $secret_key = $payload->data->type == 'customer' ? env('JWT_SECRET_KEY_CUSTOMER') : env('JWT_SECRET_KEY_USER');
+            if(isset($is_customer))
+            {
+                if($is_customer && $payload->data->type == 'customer')
+                    $secret_key = env('JWT_SECRET_KEY_CUSTOMER');
+                else if(!$is_customer && $payload->data->type == 'user')
+                    $secret_key = env('JWT_SECRET_KEY_USER');
+                else
+                    return false;
+            }
+            else
+                $secret_key = $payload->data->type == 'customer' ? env('JWT_SECRET_KEY_CUSTOMER') : env('JWT_SECRET_KEY_USER');
 
             // connect to db
             $db = new \mysqli($db_host, $db_user, $db_pass, $db_name);
@@ -176,7 +186,7 @@ class AuthController extends Controller
 
         $jwt = $request->input('token');
 
-        if($this->check($jwt)) {
+        if($this->check($jwt, $request->input('is_customer'))) {
             return response()->json(['Message' => 'Token is valid'], 200);
         }
         else {
