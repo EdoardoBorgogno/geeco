@@ -291,8 +291,8 @@ $(document).ready(function () {
         });
 
         request.fail(function (jqXHR, textStatus) {
-            $('#errorMessageText-product').text(jqXHR.responseJSON.Message);
-            $('#errorMessageText-product').css('opacity', '1');
+            $('#add-errorMessageText-product').text(jqXHR.responseJSON.Message);
+            $('#add-errorMessageText-product').css('opacity', '1');
         });
 
     });

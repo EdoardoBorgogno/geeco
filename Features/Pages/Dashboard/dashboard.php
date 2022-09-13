@@ -21,7 +21,6 @@
 
     <!-- Dashboard -->
     <link rel="stylesheet" href="<?php echo $base ?>Features/Pages/Dashboard/css/dashboard.css">
-    <script src="<?php echo $base ?>Features/Pages/Dashboard/js/dashboard.js"></script>
 
     <!-- ShopCard -->
     <link rel="stylesheet" href="<?php echo $base ?>Features/Pages/Dashboard/Components/ShopCard/css/shopCard.css">
@@ -56,7 +55,7 @@
                         <a class="nav-link" href="<?php echo $base ?>myreport">Report</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo $base ?>myanalitycs">Analitycs</a>
+                        <a class="nav-link" href="<?php echo $base ?>analitycs">Analitycs</a>
                     </li>
                 </ul>
 

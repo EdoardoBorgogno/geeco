@@ -3,6 +3,7 @@
 #errorMessageText { color: rgb(255, 132, 0); font-size: 16px; margin-top: 20px; margin-bottom: 20px; opacity: 0; font-weight: 600; }
 #errorMessageText-category{ color: rgb(255, 132, 0); font-size: 16px; margin-top: 20px; margin-bottom: 20px; opacity: 0; font-weight: 600; }
 #errorMessageText-product { color: rgb(255, 132, 0); font-size: 16px; margin-top: 20px; margin-bottom: 20px; opacity: 0; font-weight: 600; }
+#add-errorMessageText-product { color: rgb(255, 132, 0); font-size: 16px; margin-top: 20px; margin-bottom: 20px; opacity: 0; font-weight: 600; }
 #edit-errorMessageText { color: rgb(255, 132, 0); font-size: 16px; margin-top: 20px; margin-bottom: 20px; opacity: 0; font-weight: 600; }
 
 /* Geeco Features div Style */

@@ -1,0 +1,201 @@
+/* Login div css */
+.login-div {
+    margin: 0 auto;
+    text-align: left;
+    justify-content: space-between;
+    width: 800px;
+    align-items: center;
+    display: flex;
+}
+
+@media screen and (max-width: 800px) {
+    .login-div {
+        flex-direction: column-reverse;
+        width: auto;
+        text-align: center;
+    }
+    .login-div > img {
+        width: 100%;
+    }
+}
+
+/* Home content css */
+.explore-div {
+    margin: 0 auto;
+    background-color: #fbfbfb;
+    color: rgb(54, 54, 54);
+}
+
+/* Best sellers css */
+.best-seller, .best-shop {
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+.best-shop{
+  margin-top: 40px;
+}
+
+.best-seller h4,
+.best-shop h4 {
+    width: 100%; 
+    text-align: center; 
+    border-bottom: 1px solid rgb(196, 196, 196); 
+    line-height: 0.1em;
+    margin: 10px 0 20px; 
+}
+
+.best-seller h4 span,
+.best-shop h4 span { 
+    background-color: #fbfbfb; 
+    padding:0 10px; 
+}
+
+.best-seller h6,
+.best-shop h6 {
+    text-align: center;
+    line-height: 0.1em;
+}
+
+/* Card */
+.slide-shops a,
+.slide-products a {
+    text-decoration: none;
+    color: rgb(54, 54, 54);
+}
+.slide-container{
+  max-width: 1120px;
+  width: 100%;
+  padding: 40px 0;
+  margin-top: 50px;
+}
+.slide-shops,
+.slide-products {
+  margin: 0 40px;
+  overflow: hidden;
+  border-radius: 25px;
+}
+.card{
+  border-radius: 5px;
+  box-shadow: 10px rgba(0,0,0,0.2);
+  border-color: #FFF;
+  overflow: hidden;    
+  background-color: #FFF;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.image-content,
+.card-content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 14px;
+}
+.image-content{
+  position: relative;
+  row-gap: 5px;
+  padding: 25px 0;
+}
+.overlay{
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #4070F4;
+  border-radius: 25px 25px 0 25px;
+}
+.overlay::before,
+.overlay::after{
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: -40px;
+  height: 40px;
+  width: 40px;
+  background-color: #4070F4;
+}
+.overlay::after{
+  border-radius: 0 25px 0 0;
+  background-color: #FFF;
+}
+.card-image{
+  position: relative;
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  background: #FFF;
+  padding: 3px;
+}
+.card-image .card-img{
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  border-radius: 10%;
+}
+.shop-image{
+  position: relative;
+  max-height: 300px;
+  width: 100%;
+  border-radius: 50%;
+  background: #FFF;
+  padding: 3px;
+}
+.card:hover .shop-image{
+  transform: scale(1.01);
+  transition: 0.5s;
+}
+.name{
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+.description{
+  font-size: 14px;
+  color: #707070;
+  text-align: center;
+}
+.swiper-navBtn{
+  color: rgb(255, 132, 0);
+  transition: color 0.3s ease;
+}
+.swiper-navBtn:hover{
+  color: rgb(255, 132, 0);
+}
+.swiper-wrapper{
+  padding-bottom: 30px;
+}
+.swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction{
+  bottom: 0px !important;
+}
+.swiper-pagination-bullet-active {
+  background-color: rgb(255, 132, 0) !important;
+}
+.swiper-navBtn::before,
+.swiper-navBtn::after{
+  font-size: 35px;
+}
+.tag-container{
+  display: flex;
+  justify-content: right;
+}
+.tag {
+  border-radius: 3px;
+  padding: 0 25px;
+  color: #fff;
+  margin: 13px;
+  margin-bottom: 0;
+}
+.top-tag{
+  background-color: rgb(255, 132, 0);
+}
+
+@media screen and (max-width: 768px) {
+  .slide-products, .slide-shops {
+    margin: 0 10px;
+  }
+  .swiper-navBtn{
+    display: none;
+  }
+  .name{
+    text-align: center;
+  }
+}

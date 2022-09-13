@@ -116,7 +116,7 @@
                         <a class="nav-link" href="<?php echo $base ?>myreport">Report</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo $base ?>myanalitycs">Analitycs</a>
+                        <a class="nav-link" href="<?php echo $base ?>analitycs">Analitycs</a>
                     </li>
                 </ul>
 
@@ -335,7 +335,7 @@
     <div class="geeco-features">
         <div style="max-width: 300px;">
             <h1 class="text-uppercase fw-bold"><span style="color: rgb(255, 132, 0);">discover Geeco analitycs</span></h1>
-            <p class="my-3">Active geeco Analitycs and improve your geeco experience.&nbsp;Find out the most visited products in your store and anticipate trends using Geeco Upcoming.</p><a class="btn btn-primary btn-lg me-2" role="button" href="#">Go to Analitycs</a>
+            <p class="my-3">Active geeco Analitycs and improve your geeco experience.&nbsp;Find out the most visited products in your store and anticipate trends using Geeco Upcoming.</p><a class="btn btn-primary btn-lg me-2" role="button" href="<?php echo $site_base_url ?>analitycs">Go to Analitycs</a>
         </div>
         <img class="d-block" src="https://files.quantzig.com/wp-content/uploads/2020/11/actionAnalytics.svg" alt="">
     </div>
@@ -453,7 +453,7 @@
                     </div>
                 </div>
 
-                <p id="errorMessageText-product">ErrorMessage</p>
+                <p id="add-errorMessageText-product">ErrorMessage</p>
                 <button id="add-product" type="mt-1" class="btn btn-primary" reqpath="<?php echo $api_base ?>product">Add Product</button>
                 
             </div>

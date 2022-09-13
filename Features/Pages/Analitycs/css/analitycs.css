@@ -1,0 +1,31 @@
+/* Comig Soon div */
+.coming-soon{ 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    text-align: center;
+    flex-direction: column;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.coming-soon h1{
+    font-size: 50px;
+    color: rgb(54, 54, 54);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.coming-soon p{
+    font-size: 20px;
+    color: rgb(54, 54, 54);
+    margin-bottom: 20px;
+}
+
+.coming-soon .img{
+    background: url('https://www.aaravinfotech.com/assets/images/pages/ecommerce-website-development-services-15d71f1f892e0f.svg') no-repeat center center;
+    background-size: contain;
+    width: 240px;
+    height: 240px;
+}

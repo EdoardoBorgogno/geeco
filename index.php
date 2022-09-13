@@ -73,7 +73,9 @@
 
         "shop/create" => "Features/Pages/ShopCreate/shopCreate.php",
 
-        "myshop" => "Features/Pages/MyShop/myShop.php"
+        "myshop" => "Features/Pages/MyShop/myShop.php",
+
+        "analitycs" => "Features/Pages/Analitycs/analitycs.php"
 
     ];
 
@@ -97,7 +99,9 @@
 
         "shop/create" => 'UusJvalUs',
 
-        "myshop" => 'UusJvalUs'
+        "myshop" => 'UusJvalUs',
+
+        "analitycs" => 'UusJvalUs'
 
     ];
 
@@ -142,7 +146,8 @@
 
         curl_setopt($curl, CURLOPT_POSTFIELDS, array(
 
-            'token' => $_COOKIE['UusJval']
+            'token' => $_COOKIE['UusJval'],
+            'is_customer' => true
 
         ));
 
@@ -186,7 +191,8 @@
 
         curl_setopt($curl, CURLOPT_POSTFIELDS, array(
 
-            'token' => $_COOKIE['UusJvalUs']
+            'token' => $_COOKIE['UusJvalUs'],
+            'is_customer' => false
 
         ));
 
@@ -200,8 +206,6 @@
 
         curl_close($curl);
 
-
-
         if($httpcode != 200) {
 
             setcookie('UusJvalUs', '', time() - 3600, '/');
@@ -214,10 +218,6 @@
 
     }
 
-    
-
     require_once 'pageAccessHandler.php';
-
-
 
 ?>
