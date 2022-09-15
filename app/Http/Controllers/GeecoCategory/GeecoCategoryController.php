@@ -9,9 +9,17 @@ use Illuminate\Http\Request;
 
 class GeecoCategoryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         //Return all GeecoCategories
+
+        if($request->query('explore') == 'true')
+        {
+            $geecoCategories = GeecoCategory::inRandomOrder()->take(6)->get();
+
+            return response()->json(['GeecoCategories' => $geecoCategories], 200);
+        }
+        
 
         try
         {
