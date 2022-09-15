@@ -199,3 +199,23 @@
     text-align: center;
   }
 }
+
+.category-grid .row a {
+  text-decoration: none;
+  display: contents;
+}
+.category-grid .row a div {
+  height: 200px;
+}
+.category-grid .row a div h4 {
+  padding: 40px;
+  color: #FFF;
+  font-size: 22px;
+  font-weight: 600;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.category-grid .row a div:hover{
+  transform: scale(1.01);
+  transition: 0.5s;
+  cursor: pointer;
+}

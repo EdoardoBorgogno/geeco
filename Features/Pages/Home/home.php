@@ -226,7 +226,7 @@
                         <div class="card-wrapper swiper-wrapper">
                             <?php foreach($result['Shops'] as $shop): ?>
                                     <div class="card swiper-slide">
-                                        <a href="<?php echo $site_base_url . 'shop?catg=topweek&frm=home&shpdid=' . $shop['shopId'] ?>">
+                                        <a href="<?php echo $site_base_url . 'shop?catg=topmounth&frm=home&shpdid=' . $shop['shopId'] ?>">
                                             <div class="image-content">
                                                 <div class="shop-image">
                                                     <img class="card-img" src="<?php echo $api_base . 'images/shopImages/' . $shop['shopImage'] ?>" alt="">
@@ -260,7 +260,7 @@
     </div>
     
     <?php if(isset($_COOKIE['UusJval']) == false): ?>
-        <div class="container mt-5 mt-xl-0">
+        <div class="container mt-5 mt-xl-0 mb-5">
             <div class="container py-0 py-xl-5">
                 <div class="row gy-4 gy-md-0">
                     <div class="col-md-6 text-center text-md-start d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-md-start align-items-md-center justify-content-xl-center">
@@ -276,6 +276,64 @@
             </div>
         </div>
     <?php endif; ?>
+    
+    <?php 
+
+        /* Get 6 random categories */
+        $curl = curl_init(); 
+
+        curl_setopt($curl, CURLOPT_URL, $api_base . 'geecocategory/?explore=true');
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+        $result = curl_exec($curl);
+        $httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+                
+        curl_close($curl);
+
+        if ($httpcode == 200) {
+            $result = json_decode($result, true);
+            $result = $result['GeecoCategories'];
+        }
+
+    ?>
+
+    <!-- Geeco Category -->
+    <div class="container category-grid mt-5">
+        <div class="row">
+            <a href="<?php echo $site_base_url . 'category?id=' . $result[0]['categoryId'] ?>&frm=home&catg=rnd">
+                <div class="col-md-3" style="background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5) ), url(<?php echo $api_base . "images/categoryImages/" . $result[0]['categoryImage'] ?>) center center no-repeat; background-size: cover;">
+                    <h4><?php echo $result[0]['categoryName'] ?></h4>
+                </div>
+            </a>
+            <a href="<?php echo $site_base_url . 'category?id=' . $result[1]['categoryId'] ?>&frm=home&catg=rnd">
+                <div class="col-md-6" style="background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5) ), url(<?php echo $api_base . "images/categoryImages/" . $result[1]['categoryImage'] ?>) center center no-repeat; background-size: cover;">
+                    <h4><?php echo $result[1]['categoryName'] ?></h4>
+                </div>
+            </a>
+            <a href="<?php echo $site_base_url . 'category?id=' . $result[2]['categoryId'] ?>&frm=home&catg=rnd">
+                <div class="col-md-3" style="background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5) ), url(<?php echo $api_base . "images/categoryImages/" . $result[2]['categoryImage'] ?>) center center no-repeat; background-size: cover;">
+                    <h4><?php echo $result[2]['categoryName'] ?></h4>
+                </div>
+            </a>
+        </div>
+        <div class="row">
+            <a href="<?php echo $site_base_url . 'category?id=' . $result[3]['categoryId'] ?>&frm=home&catg=rnd">
+                <div class="col-md-4" style="background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5) ), url(<?php echo $api_base . "images/categoryImages/" . $result[3]['categoryImage'] ?>) center center no-repeat; background-size: cover;">
+                    <h4><?php echo $result[3]['categoryName'] ?></h4>
+                </div>
+            </a>
+            <a href="<?php echo $site_base_url . 'category?id=' . $result[4]['categoryId'] ?>&frm=home&catg=rnd">
+                <div class="col-md-4" style="background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5) ), url(<?php echo $api_base . "images/categoryImages/" . $result[4]['categoryImage'] ?>) center center no-repeat; background-size: cover;">
+                    <h4><?php echo $result[4]['categoryName'] ?></h4>
+                </div>
+            </a>
+            <a href="<?php echo $site_base_url . 'category?id=' . $result[5]['categoryId'] ?>&frm=home&catg=rnd">
+                <div class="col-md-4" style="background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5) ), url(<?php echo $api_base . "images/categoryImages/" . $result[5]['categoryImage'] ?>) center center no-repeat; background-size: cover;">
+                    <h4><?php echo $result[5]['categoryName'] ?></h4>
+                </div>
+            </a>
+        </div>
+    </div>
 
     <link rel="stylesheet" href="<?php echo $base ?>Features/Common/Components/UserNavbar/css/userNavbar.css">
 
