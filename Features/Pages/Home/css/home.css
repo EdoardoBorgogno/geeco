@@ -167,7 +167,7 @@
   bottom: 0px !important;
 }
 .swiper-pagination-bullet-active {
-  background-color: rgb(255, 132, 0) !important;
+  background-color: rgb(54, 54, 54) !important;
 }
 .swiper-navBtn::before,
 .swiper-navBtn::after{
@@ -182,9 +182,13 @@
   padding: 0 25px;
   color: #fff;
   margin: 13px;
+  margin-left: 0;
   margin-bottom: 0;
 }
 .top-tag{
+  background-color: rgb(255, 0, 0);
+}
+.position-top-tag{
   background-color: rgb(255, 132, 0);
 }
 

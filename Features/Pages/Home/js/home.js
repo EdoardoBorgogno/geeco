@@ -1,6 +1,9 @@
 $(document).ready(function () {
 
     var productsSlide = new Swiper(".slide-products", {
+        autoplay: {
+            delay: 2000,
+        },
         slidesPerView: 3,
         spaceBetween: 25,
         loop: true,
@@ -31,6 +34,9 @@ $(document).ready(function () {
     });
 
     var shopsSlide = new Swiper(".slide-shops", {
+        autoplay: {
+            delay: 5000,
+        },
         slidesPerView: 3,
         spaceBetween: 25,
         loop: true,

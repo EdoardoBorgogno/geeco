@@ -75,7 +75,9 @@
 
         "myshop" => "Features/Pages/MyShop/myShop.php",
 
-        "analitycs" => "Features/Pages/Analitycs/analitycs.php"
+        "analitycs" => "Features/Pages/Analitycs/analitycs.php",
+
+        "product" => "Features/Pages/Product/product.php"
 
     ];
 
@@ -101,7 +103,9 @@
 
         "myshop" => 'UusJvalUs',
 
-        "analitycs" => 'UusJvalUs'
+        "analitycs" => 'UusJvalUs',
+
+        "product" => 'public'
 
     ];
 

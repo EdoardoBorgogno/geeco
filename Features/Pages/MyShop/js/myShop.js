@@ -250,7 +250,7 @@ $(document).ready(function () {
         var productImage_2 = $("#productImage2").prop('files')[0];
         var productImage_3 = $("#productImage3").prop('files')[0];
         var productImage_4 = $("#productImage4").prop('files')[0];
-        var productImage_5 = $("#productImage4").prop('files')[0];
+        var productImage_5 = $("#productImage5").prop('files')[0];
 
         var formData = new FormData();
 

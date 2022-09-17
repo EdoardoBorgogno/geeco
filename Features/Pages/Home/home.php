@@ -165,34 +165,32 @@
                 <div class="slide-container swiper">
                     <div class="slide-products">
                         <div class="card-wrapper swiper-wrapper">
+                            <?php $index = 1; ?>
                             <?php foreach($result['products'] as $product): ?>
-                                    <div class="card swiper-slide">
-                                        <a href="<?php echo $site_base_url . 'product?max=10&catg=topweek&frm=home&prdid=' . $product['productId'] ?>">
-                                            <div class="tag-container">
-                                                <span class="tag top-tag">TOP</span>
+                                <div class="card swiper-slide">
+                                    <a href="<?php echo $site_base_url . 'product?max=10&catg=topweek&frm=home&prdid=' . $product['productId'] ?>">
+                                        <div class="tag-container">
+                                            <span class="tag position-top-tag"><?php echo $index ?>#</span>
+                                        </div>
+                                        <div class="image-content">
+                                            <div class="card-image">
+                                                <img class="card-img" src="<?php echo $api_base . 'images/productImages/' . explode(';', $product['productImages'])[0] ?>" alt="">
                                             </div>
-                                            <div class="image-content">
-                                                <div class="card-image">
-                                                    <img class="card-img" src="<?php echo $api_base . 'images/productImages/' . explode(';', $product['productImages'])[0] ?>" alt="">
-                                                </div>
-                                            </div>
+                                        </div>
 
-                                            <div class="card-content">
-                                                <h2 class="name"><?php echo $product['productName'] ?></h2>
-                                                <br>
-                                                <h5><?php echo $product['productPrice'] ?></h5>
-                                            </div>
-                                        </a>
-                                    </div>
+                                        <div class="card-content">
+                                            <h2 class="name"><?php echo $product['productName'] ?></h2>
+                                            <br>
+                                            <h5><?php echo $product['productPrice'] ?></h5>
+                                        </div>
+                                    </a>
+                                </div>
+                                <?php $index++; ?>
                             <?php endforeach; ?>
                         </div>
-                    </div>
-                    
-                    <div class="swiper-container">
-                        <div class="swiper-wrapper"></div>
                         <div class="swiper-pagination"></div>
-                    </div>
 
+                    </div>
                 </div>
 
             </div>
@@ -244,13 +242,8 @@
                                     </div>
                             <?php endforeach; ?>
                         </div>
-                    </div>
-                    
-                    <div class="swiper-container">
-                        <div class="swiper-wrapper"></div>
                         <div class="swiper-pagination"></div>
                     </div>
-
                 </div>
 
             </div>
