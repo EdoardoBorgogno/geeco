@@ -19,7 +19,7 @@ class ProductController extends Controller
         $top_in_days = $request->query('top');
 
         if ($shop_id != null){
-            $products = Product::select('products.productId', 'products.productPrice', 'products.productName', 'products.productDescription', 'bookable', 'availableFrom', 'shop.shopName', 'products.quantity', 'products.productDiscount', 'products.insertionDate', 'products.productImages', 'shopcategory.categoryName')
+            $products = Product::select('products.productId', 'products.shopId', 'products.productPrice', 'products.productName', 'products.productDescription', 'bookable', 'availableFrom', 'shop.shopName', 'products.quantity', 'products.productDiscount', 'products.insertionDate', 'products.productImages', 'shopcategory.categoryName')
                                 ->join('shopcategory', 'shopcategory.shopCategoryId', '=', 'products.categoryId')
                                 ->join('shop', 'shop.shopId', '=', 'products.shopId')
                                 ->where('products.shopId', $shop_id)
@@ -63,7 +63,7 @@ class ProductController extends Controller
 
             $products = [];
             foreach ($products_ids as $product_id){
-                $products = array_merge($products, Product::select('products.productId', 'products.productPrice', 'products.productName', 'products.productDescription', 'bookable', 'availableFrom', 'shop.shopName', 'products.quantity', 'products.productDiscount', 'products.insertionDate', 'products.productImages', 'shopcategory.categoryName')
+                $products = array_merge($products, Product::select('products.productId', 'products.shopId', 'products.productPrice', 'products.productName', 'products.productDescription', 'bookable', 'availableFrom', 'shop.shopName', 'products.quantity', 'products.productDiscount', 'products.insertionDate', 'products.productImages', 'shopcategory.categoryName')
                                                         ->join('shopcategory', 'shopcategory.shopCategoryId', '=', 'products.categoryId')
                                                         ->join('shop', 'shop.shopId', '=', 'products.shopId')
                                                         ->where('products.productId', $product_id['productId'])
@@ -88,7 +88,7 @@ class ProductController extends Controller
 
             $products = [];
             foreach ($products_ids as $product_id){
-                $products = array_merge($products, Product::select('products.productId', 'products.productPrice', 'products.productName', 'products.productDescription', 'bookable', 'availableFrom', 'shop.shopName', 'products.quantity', 'products.productDiscount', 'products.insertionDate', 'products.productImages', 'shopcategory.categoryName')
+                $products = array_merge($products, Product::select('products.productId', 'products.productPrice', 'products.productName', 'products.productDescription', 'bookable', 'availableFrom', 'products.shopId', 'shop.shopName', 'products.quantity', 'products.productDiscount', 'products.insertionDate', 'products.productImages', 'shopcategory.categoryName')
                                                         ->join('shopcategory', 'shopcategory.shopCategoryId', '=', 'products.categoryId')
                                                         ->join('shop', 'shop.shopId', '=', 'products.shopId')
                                                         ->where('products.productId', $product_id['productId'])
@@ -131,7 +131,7 @@ class ProductController extends Controller
             //validate request
             $this->validate($request, [
                 'productName' => 'required|string|regex:/^[\pL\s\-]+$/u|max:150',
-                'productDescription' => 'required|string',
+                'productDescription' => 'required|string|min:100|max:1000',
                 'productPrice' => 'required|numeric',
                 'quantity' => 'required|numeric',
                 'productImage_1' => 'required|image|mimes:jpeg,png,jpg|max:2048',
@@ -204,7 +204,7 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $product = Product::select('products.productId', 'products.productPrice', 'products.productName', 'products.productDescription', 'bookable', 'availableFrom', 'shop.shopName', 'products.quantity', 'products.productDiscount', 'products.insertionDate', 'products.productImages', 'shopcategory.categoryName')
+        $product = Product::select('products.productId', 'products.productPrice', 'products.productName', 'products.productDescription', 'bookable', 'availableFrom', 'shop.shopName', 'products.shopId', 'products.quantity', 'products.productDiscount', 'products.insertionDate', 'products.productImages', 'shopcategory.categoryName')
                             ->join('shopcategory', 'shopcategory.shopCategoryId', '=', 'products.categoryId')
                             ->join('shop', 'shop.shopId', '=', 'products.shopId')
                             ->where('products.productId', $id)
