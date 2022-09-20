@@ -20,6 +20,12 @@ class GeecoCategoryController extends Controller
             return response()->json(['GeecoCategories' => $geecoCategories], 200);
         }
         
+        if($request->query('name') != '')
+        {
+            $geecoCategories = GeecoCategory::where('categoryName', 'like', '%'.$request->query('name').'%')->get();
+
+            return response()->json(['GeecoCategories' => $geecoCategories], 200);
+        }
 
         try
         {
@@ -39,7 +45,17 @@ class GeecoCategoryController extends Controller
 
     public function show($id)
     {
-        
+        //Return a GeecoCategory
+
+        try
+        {
+            $geecoCategory = GeecoCategory::findOrFail($id);
+            return response()->json(['GeecoCategory' => $geecoCategory], 200);
+        }
+        catch (Exception $e)
+        {
+            return response()->json(['Message' => "Sorry, Something went wrong." ], 500);
+        }
     }
 
     public function update(Request $request, $id)

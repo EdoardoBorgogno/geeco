@@ -92,7 +92,7 @@ class ShopController extends Controller
         }   
 
         $token = $request->header('Authorization');
-        $result = AuthController::check($token);
+        $result = AuthController::check($token, false);
         
         if($result == false) {
             return response()->json(['Message' => "Sorry, You are not authorized." ], 401);
@@ -219,7 +219,7 @@ class ShopController extends Controller
         else {
             if($request->header('Authorization') != null || $request->header('Authorization') != '') {
                 $token = $request->header('Authorization');
-                $result = AuthController::check($token);
+                $result = AuthController::check($token, false);
     
                 if($result != false) {
                     $customer_id = AuthController::getIdFromToken($token);
@@ -263,7 +263,7 @@ class ShopController extends Controller
         }  
 
         $token = $request->header('Authorization');
-        $result = AuthController::check($token);
+        $result = AuthController::check($token, false);
 
         if($result != false) {
             $id = AuthController::getIdFromToken($token);

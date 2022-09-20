@@ -33,7 +33,9 @@ class ProductController extends Controller
 
             $products_ids = array_merge($products_ids, Product::select('products.productId')
                                 ->limit(20)  
+                                ->join('shop', 'shop.shopId', '=', 'products.shopId')
                                 ->where('products.productName', 'like', '%'.$key.'%')
+                                ->where('shop.shopName', 'like', '%'.$key.'%')
                                 ->get()
                                 ->toArray()
                             );
@@ -52,7 +54,9 @@ class ProductController extends Controller
             foreach ($keys as $key){
                 $products_ids = array_merge($products_ids, Product::select('productId')
                                                                     ->limit(4)
+                                                                    ->join('shop', 'shop.shopId', '=', 'products.shopId')
                                                                     ->where('productName', 'like', '%'.$key.'%')
+                                                                    ->orWhere('shopName', 'like', '%'.$key.'%')
                                                                     ->orWhere('productDescription', 'like', '%'.$key.'%')
                                                                     ->get()->toArray()
                                             );
@@ -108,7 +112,7 @@ class ProductController extends Controller
         }   
 
         $token = $request->header('Authorization');
-        $result = AuthController::check($token);
+        $result = AuthController::check($token, false);
 
         if($result == false) {
             return response()->json(['Message' => "Sorry, You are not authorized." ], 401);
@@ -210,7 +214,7 @@ class ProductController extends Controller
                             ->where('products.productId', $id)
                             ->get();
 
-        if($product == null) {
+        if(count($product) == 0) {
             return response()->json(['Message' => "Sorry, Product not found." ], 404);
         }
 
@@ -229,7 +233,7 @@ class ProductController extends Controller
         }   
 
         $token = $request->header('Authorization');
-        $result = AuthController::check($token);
+        $result = AuthController::check($token, false);
 
         if($result == false) {
             return response()->json(['Message' => "Sorry, You are not authorized." ], 401);

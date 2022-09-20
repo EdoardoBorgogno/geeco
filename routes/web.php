@@ -80,6 +80,16 @@ $router->get('/product/{id}', 'Product\ProductController@show');
 */
 
 $router->get('/geecocategory', 'GeecoCategory\GeecoCategoryController@index');
+$router->get('/geecocategory/{id}', 'GeecoCategory\GeecoCategoryController@show');
+
+/*
+|--------------------------------------------------------------------------
+| CustomerLists Routes
+|--------------------------------------------------------------------------
+*/
+
+$router->post('/customerlists', 'CustomerLists\CustomerListsController@store');
+$router->get('/customerlists', 'CustomerLists\CustomerListsController@index');
 
 /*
 |--------------------------------------------------------------------------

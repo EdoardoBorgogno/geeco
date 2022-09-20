@@ -99,7 +99,7 @@ class CustomerController extends Controller
         }        
 
         $token = $request->header('Authorization');
-        $result = AuthController::check($token);
+        $result = AuthController::check($token, true);
         
         if($result == false) {
             return response()->json(['Message' => "Sorry, You are not authorized." ], 401);
@@ -130,7 +130,7 @@ class CustomerController extends Controller
         }           
 
         $token = $request->header('Authorization');
-        $result = AuthController::check($token);
+        $result = AuthController::check($token, true);
 
         if($result == false) {
             return response()->json(['Message' => "Sorry, You are not authorized." ], 401);
@@ -197,7 +197,7 @@ class CustomerController extends Controller
         }         
 
         $token = $request->header('Authorization');
-        $result = AuthController::check($token);
+        $result = AuthController::check($token, true);
 
         if($result == false) {
             return response()->json(['Message' => "Sorry, You are not authorized." ], 401);

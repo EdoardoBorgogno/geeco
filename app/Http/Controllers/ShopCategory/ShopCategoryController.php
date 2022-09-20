@@ -29,7 +29,7 @@ class ShopCategoryController extends Controller
         }   
 
         $token = $request->header('Authorization');
-        $result = AuthController::check($token);
+        $result = AuthController::check($token, false);
 
         if($result == false) {
             return response()->json(['Message' => "Sorry, You are not authorized." ], 401);
@@ -113,7 +113,7 @@ class ShopCategoryController extends Controller
         }   
 
         $token = $request->header('Authorization');
-        $result = AuthController::check($token);
+        $result = AuthController::check($token, false);
 
         if($result == false) {
             return response()->json(['Message' => "Sorry, You are not authorized." ], 401);
@@ -204,7 +204,7 @@ class ShopCategoryController extends Controller
         }   
 
         $token = $request->header('Authorization');
-        $result = AuthController::check($token);
+        $result = AuthController::check($token, false);
 
         if($result == false) {
             return response()->json(['Message' => "Sorry, You are not authorized." ], 401);
