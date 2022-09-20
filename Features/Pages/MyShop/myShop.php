@@ -243,7 +243,7 @@
                                 <tr>
                                     <td><?php echo $category['categoryName'] ?></td>
                                     <td><?php echo $category['categoryShortDescription'] ?></td>
-                                    <td class="d-none d-md-block"><div style="height:120px; background: url('<?php echo $api_base . 'images/shopCategoryImages/' . $category['categoryImage'] ?>') center center no-repeat; width:120px; background-size: contain;" alt="" class="img-fluid rounded mb-3"></div></td>
+                                    <td class="d-none d-md-block"><div style="height:120px; background: url('<?php echo $api_base . $public_folder . 'images/shopCategoryImages/' . $category['categoryImage'] ?>') center center no-repeat; width:120px; background-size: contain;" alt="" class="img-fluid rounded mb-3"></div></td>
                                     <td>
                                         <button reqpath="<?php echo $api_base ?>shopcategory" class="btn btn-primary px-4 editCategory_btn" type="button" category="<?php echo $category['shopCategoryId'] ?>">Edit</button>
                                         <button reqpath="<?php echo $api_base ?>shopcategory" class="btn btn-danger deleteCategory_btn" type="button" category="<?php echo $category['shopCategoryId'] ?>">Delete</button>
@@ -359,7 +359,7 @@
                             <?php foreach($products as $product) { ?>
                                 <tr>
                                     <td><?php echo $product['productName'] ?></td>
-                                    <td class="d-none d-md-block"><div style="height:120px; background: url('<?php echo $api_base . 'images/productImages/' . explode(';', $product['productImages'])[0] ?>') center center no-repeat; width:120px; background-size: contain;" alt="" class="img-fluid rounded mb-3"></div></td>
+                                    <td class="d-none d-md-block"><div style="height:120px; background: url('<?php echo $api_base . $public_folder . 'images/productImages/' . explode(';', $product['productImages'])[0] ?>') center center no-repeat; width:120px; background-size: contain;" alt="" class="img-fluid rounded mb-3"></div></td>
                                     <td><?php echo $product['productPrice'] ?></td>
                                     <td><?php echo $product['categoryName'] ?></td>
                                     <td>

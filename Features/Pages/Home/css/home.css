@@ -57,9 +57,9 @@
 }
 
 /* Card */
-.slide-shops a,
 .slide-products a {
     text-decoration: none;
+    height: 364px;
     color: rgb(54, 54, 54);
 }
 .slide-container{
@@ -72,7 +72,10 @@
 .slide-products {
   margin: 0 40px;
   overflow: hidden;
-  border-radius: 25px;
+}
+.slide-shops a{
+  text-decoration: none;
+  color: rgb(54, 54, 54);
 }
 .card{
   border-radius: 5px;
@@ -92,7 +95,7 @@
 .image-content{
   position: relative;
   row-gap: 5px;
-  padding: 25px 0;
+  padding: 0px 0;
 }
 .overlay{
   position: absolute;
@@ -121,7 +124,6 @@
   position: relative;
   height: 150px;
   width: 150px;
-  border-radius: 50%;
   background: #FFF;
   padding: 3px;
 }
@@ -131,13 +133,20 @@
   object-fit: contain;
   border-radius: 10%;
 }
+.shop-image .card-image{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10%;
+}
+.card-img {
+  height: 185px;
+}
 .shop-image{
   position: relative;
-  max-height: 300px;
   width: 100%;
   border-radius: 50%;
   background: #FFF;
-  padding: 3px;
 }
 .card:hover .shop-image{
   transform: scale(1.01);
@@ -204,9 +213,17 @@
   }
 }
 
+.category-grid .row {
+  overflow: hidden;
+}
+.hidden-overflow {
+  overflow: hidden !important;
+  display: contents;
+}
 .category-grid .row a {
   text-decoration: none;
   display: contents;
+  overflow: hidden;
 }
 .category-grid .row a div {
   height: 200px;
@@ -218,8 +235,13 @@
   font-weight: 600;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
-.category-grid .row a div:hover{
-  transform: scale(1.01);
-  transition: 0.5s;
+.category-grid .row .hidden-overflow a div:hover {
   cursor: pointer;
+  transform: scale(1.1);
+  transition: 0.5s;
+}
+@media screen and (max-width: 768px) {
+  .category-grid .row a div {
+    width: 100%;
+  }
 }

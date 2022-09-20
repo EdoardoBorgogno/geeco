@@ -51,7 +51,7 @@
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="<?php echo $base ?>dashboard">Home</a>
+                        <a class="nav-link active" href="<?php echo $base ?>">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo $base ?>shopinfo">Shop</a>
@@ -62,25 +62,27 @@
                         </li>
                     <?php endif ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo $base ?>analitycs">Explore</a>
+                        <a class="nav-link" href="<?php echo $base ?>explore">Explore</a>
                     </li>
                 </ul>
 
-                <form class="form-inline">
+                <form action="javascript:void(0);" class="form-inline">
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text btn btn-primary">
+                            <span id="search-btn" class="input-group-text btn btn-primary">
                                 <i class="fas fa-search"></i>
                             </span>
                         </div>
-                        <input type="text" class="form-control" placeholder="Search">
+                        <input type="text" class="form-control" placeholder="Search" id="search-input">
                     </div>
                 </form>
 
                 <div class="two-button">
-                    <a href="<?php echo $base ?>cart" class="btn btn-primary" role="button" aria-pressed="true">
-                        <i class="fas fa-shopping-cart"></i>
-                    </a>
+                    <?php if (isset($_COOKIE['UusJval'])): ?>
+                        <a href="<?php echo $base ?>cart" class="btn btn-primary" role="button" aria-pressed="true">
+                            <i class="fas fa-shopping-cart"></i>
+                        </a>
+                    <?php endif ?>
                     <?php if (isset($_COOKIE['UusJval'])): ?>
                         <a onclick="logout()" class="btn btn-primary" role="button" aria-pressed="true">
                         <i class="fas fa-sign-out-alt"></i>
@@ -174,14 +176,14 @@
                                         </div>
                                         <div class="image-content">
                                             <div class="card-image">
-                                                <img class="card-img" src="<?php echo $api_base . 'images/productImages/' . explode(';', $product['productImages'])[0] ?>" alt="">
+                                                <img class="card-img" src="<?php echo $api_base . $public_folder . 'images/productImages/' . explode(';', $product['productImages'])[0] ?>" alt="">
                                             </div>
                                         </div>
 
                                         <div class="card-content">
                                             <h2 class="name"><?php echo $product['productName'] ?></h2>
                                             <br>
-                                            <h5><?php echo $product['productPrice'] ?></h5>
+                                            <h5><?php echo $product['productPrice'] ?>€</h5>
                                         </div>
                                     </a>
                                 </div>
@@ -227,11 +229,11 @@
                                         <a href="<?php echo $site_base_url . 'shop?catg=topmounth&frm=home&shpdid=' . $shop['shopId'] ?>">
                                             <div class="image-content">
                                                 <div class="shop-image">
-                                                    <img class="card-img" src="<?php echo $api_base . 'images/shopImages/' . $shop['shopImage'] ?>" alt="">
+                                                    <img class="card-img" src="<?php echo $api_base . $public_folder . 'images/shopImages/' . $shop['shopImage'] ?>" alt="">
                                                 </div>
                                             </div>
 
-                                            <div class="card-content">
+                                            <div class="card-content mt-3">
                                                 <h2 class="name"><?php echo $shop['shopName'] ?></h2>
                                                 <br>
                                                 <p class="p-3">
@@ -293,38 +295,50 @@
     <!-- Geeco Category -->
     <div class="container category-grid mt-5">
         <div class="row">
-            <a href="<?php echo $site_base_url . 'category?id=' . $result[0]['categoryId'] ?>&frm=home&catg=rnd">
-                <div class="col-md-3" style="background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5) ), url(<?php echo $api_base . "images/categoryImages/" . $result[0]['categoryImage'] ?>) center center no-repeat; background-size: cover;">
-                    <h4><?php echo $result[0]['categoryName'] ?></h4>
-                </div>
-            </a>
-            <a href="<?php echo $site_base_url . 'category?id=' . $result[1]['categoryId'] ?>&frm=home&catg=rnd">
-                <div class="col-md-6" style="background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5) ), url(<?php echo $api_base . "images/categoryImages/" . $result[1]['categoryImage'] ?>) center center no-repeat; background-size: cover;">
-                    <h4><?php echo $result[1]['categoryName'] ?></h4>
-                </div>
-            </a>
-            <a href="<?php echo $site_base_url . 'category?id=' . $result[2]['categoryId'] ?>&frm=home&catg=rnd">
-                <div class="col-md-3" style="background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5) ), url(<?php echo $api_base . "images/categoryImages/" . $result[2]['categoryImage'] ?>) center center no-repeat; background-size: cover;">
-                    <h4><?php echo $result[2]['categoryName'] ?></h4>
-                </div>
-            </a>
+            <div class="hidden-overflow">
+                <a href="<?php echo $site_base_url . 'explore?category=' . $result[0]['categoryId'] ?>&frm=home&catg=rnd">
+                    <div class="col-md-3" style="background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5) ), url(<?php echo $api_base . $public_folder . "images/categoryImages/" . $result[0]['categoryImage'] ?>) center center no-repeat; background-size: cover;">
+                        <h4><?php echo $result[0]['categoryName'] ?></h4>
+                    </div>
+                </a>
+            </div>
+            <div class="hidden-overflow">
+                <a href="<?php echo $site_base_url . 'explore?category=' . $result[1]['categoryId'] ?>&frm=home&catg=rnd">
+                    <div class="col-md-6" style="background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5) ), url(<?php echo $api_base . $public_folder . "images/categoryImages/" . $result[1]['categoryImage'] ?>) center center no-repeat; background-size: cover;">
+                        <h4><?php echo $result[1]['categoryName'] ?></h4>
+                    </div>
+                </a>
+            </div>
+            <div class="hidden-overflow">
+                <a href="<?php echo $site_base_url . 'explore?category=' . $result[2]['categoryId'] ?>&frm=home&catg=rnd">
+                    <div class="col-md-3" style="background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5) ), url(<?php echo $api_base . $public_folder . "images/categoryImages/" . $result[2]['categoryImage'] ?>) center center no-repeat; background-size: cover;">
+                        <h4><?php echo $result[2]['categoryName'] ?></h4>
+                    </div>
+                </a>
+            </div>
         </div>
         <div class="row">
-            <a href="<?php echo $site_base_url . 'category?id=' . $result[3]['categoryId'] ?>&frm=home&catg=rnd">
-                <div class="col-md-4" style="background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5) ), url(<?php echo $api_base . "images/categoryImages/" . $result[3]['categoryImage'] ?>) center center no-repeat; background-size: cover;">
-                    <h4><?php echo $result[3]['categoryName'] ?></h4>
-                </div>
-            </a>
-            <a href="<?php echo $site_base_url . 'category?id=' . $result[4]['categoryId'] ?>&frm=home&catg=rnd">
-                <div class="col-md-4" style="background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5) ), url(<?php echo $api_base . "images/categoryImages/" . $result[4]['categoryImage'] ?>) center center no-repeat; background-size: cover;">
-                    <h4><?php echo $result[4]['categoryName'] ?></h4>
-                </div>
-            </a>
-            <a href="<?php echo $site_base_url . 'category?id=' . $result[5]['categoryId'] ?>&frm=home&catg=rnd">
-                <div class="col-md-4" style="background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5) ), url(<?php echo $api_base . "images/categoryImages/" . $result[5]['categoryImage'] ?>) center center no-repeat; background-size: cover;">
-                    <h4><?php echo $result[5]['categoryName'] ?></h4>
-                </div>
-            </a>
+            <div class="hidden-overflow">
+                <a href="<?php echo $site_base_url . 'explore?category=' . $result[3]['categoryId'] ?>&frm=home&catg=rnd">
+                    <div class="col-md-4" style="background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5) ), url(<?php echo $api_base . $public_folder . "images/categoryImages/" . $result[3]['categoryImage'] ?>) center center no-repeat; background-size: cover;">
+                        <h4><?php echo $result[3]['categoryName'] ?></h4>
+                    </div>
+                </a>
+            </div>
+            <div class="hidden-overflow">
+                <a href="<?php echo $site_base_url . 'explore?category=' . $result[4]['categoryId'] ?>&frm=home&catg=rnd">
+                    <div class="col-md-4" style="background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5) ), url(<?php echo $api_base . $public_folder . "images/categoryImages/" . $result[4]['categoryImage'] ?>) center center no-repeat; background-size: cover;">
+                        <h4><?php echo $result[4]['categoryName'] ?></h4>
+                    </div>
+                </a>
+            </div>
+            <div class="hidden-overflow">
+                <a href="<?php echo $site_base_url . 'explore?category=' . $result[5]['categoryId'] ?>&frm=home&catg=rnd">
+                    <div class="col-md-4" style="background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5) ), url(<?php echo $api_base . $public_folder . "images/categoryImages/" . $result[5]['categoryImage'] ?>) center center no-repeat; background-size: cover;">
+                        <h4><?php echo $result[5]['categoryName'] ?></h4>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 

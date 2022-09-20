@@ -131,7 +131,7 @@
                             <div class="col-lg-3 col-md-6 col-sm-10">';  
                                 $shop_name = $shop['Shop'][0]['shopName'];
                                 $shop_description = strlen($shop['Shop'][0]['shopDescription']) < 180 ? $shop['Shop'][0]['shopDescription'] : substr($shop['Shop'][0]['shopDescription'], 0, 180) . '...';
-                                $shop_image = $api_base . 'images/shopImages/' . str_replace(' ', '.', $shop['Shop'][0]['shopImage']);
+                                $shop_image = $api_base . $public_folder . 'images/shopImages/' . str_replace(' ', '.', $shop['Shop'][0]['shopImage']);
                                 $shop_id = $shop['Shop'][0]['shopId'];
 
                                 $shopCard = new ShopCard($shop_name, $shop_description, $shop_image, $shop_id, $site_base_url . 'myshop?id=' . $shop_id);

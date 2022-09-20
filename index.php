@@ -35,6 +35,8 @@
     $index_base = $config['indexBase'];
 
     $site_base_url = $config['siteBaseUrl'];
+    
+    $public_folder = $config['publicFolder'];
 
 	
 
@@ -77,7 +79,9 @@
 
         "analitycs" => "Features/Pages/Analitycs/analitycs.php",
 
-        "product" => "Features/Pages/Product/product.php"
+        "product" => "Features/Pages/Product/product.php",
+
+        "explore" => "Features/Pages/Explore/explore.php",
 
     ];
 
@@ -105,7 +109,9 @@
 
         "analitycs" => 'UusJvalUs',
 
-        "product" => 'public'
+        "product" => 'public',
+
+        "explore" => 'public'
 
     ];
 
